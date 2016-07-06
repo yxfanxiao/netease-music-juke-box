@@ -1,12 +1,12 @@
 import config from "../../../config";
 
-const NP_API_URL = "http://music.163.com/api/";
+const NM_API_URL = "http://music.163.com/api/";
 
 export default class ServiceClient
 {
     getUserPlayLists(uid = config.user_id)
     {
-        return new Pormise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: `${NM_API_URL}/user/playlist/`,
                 data: {
@@ -29,7 +29,7 @@ export default class ServiceClient
 
     getPlayListDetail(id = config.playlist_id)
     {
-        return new Pormise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: `${NM_API_URL}/playlist/detail`,
                 data: {
@@ -48,3 +48,7 @@ export default class ServiceClient
         });
     }
 }
+
+
+let __instance = null;
+ServiceClient.getInstance = () => __instance || new ServiceClient();
