@@ -10,6 +10,7 @@ export default class Panel extends View
         this.addStyleClass("nm-panel");
         this._initLayout();
     }
+    
 
     get title()
     {

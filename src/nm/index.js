@@ -9,7 +9,7 @@ $(main);
 function main()
 {
     const app = new Application();
-    console.log(app)
+
     app.placeAt(document.body);
     app.run();
 

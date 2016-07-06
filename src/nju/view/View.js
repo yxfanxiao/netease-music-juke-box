@@ -5,6 +5,7 @@ export default class View extends ManagedObjected
     init()
     {        
         super.init();
+        
         this._subviews = [];
         this.$element = $(`<${this.getElementTag()} />`);
         if (this.id !== null)
@@ -19,7 +20,7 @@ export default class View extends ManagedObjected
         return "div";
     }
 
-    addSubview(view)
+    addSubview(view, $container = this.$container)
     {
         if (view instanceof View)
         {
@@ -29,7 +30,7 @@ export default class View extends ManagedObjected
             }
             view._parent = this;
             this._subviews.push(view);
-            view.placeAt(this.$container);
+            view.placeAt($container);
         }
     }
 
@@ -51,12 +52,12 @@ export default class View extends ManagedObjected
         }
     }
 
-    addSubviews(views)
+    addSubviews(views, $container = this.$container)
     {
         if (Array.isArray(views))
         {
             views.forEach(view => {
-                this.addSubview(view);
+                this.addSubview(view, $container);
             });
         }
     }
@@ -79,7 +80,7 @@ export default class View extends ManagedObjected
 
     placeAt(target)
     {
-        const $target = target instanceof jQuery ? target : $(target);
+        const $target = target instanceof $ ? target : $(target);
         $target.append(this.$element);
     }
 

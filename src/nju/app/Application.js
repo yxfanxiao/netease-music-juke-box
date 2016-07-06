@@ -1,6 +1,6 @@
 import View from "../view/View";
 
-window.app = null;
+window.$app = null;
 
 export default class Application extends View
 {
@@ -8,9 +8,9 @@ export default class Application extends View
     {
         super(...args);
 
-        if (window.app === null)
+        if (window.$app === null)
         {
-            window.app = this;
+            window.$app = this;
         }
         else
         {
@@ -22,7 +22,7 @@ export default class Application extends View
     {
         super.init();
 
-        this.addStyleClass("nju-application");
+        this.addStyleClass("nju-app");
     }
 
     run()

@@ -5,10 +5,10 @@ export default class ManagedObject
         this._id = id;
         this._parent = null;
 
-        this._init();
+        this.init();
     }
 
-    _init()
+    init()
     {
 
     }
