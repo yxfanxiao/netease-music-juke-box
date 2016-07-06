@@ -1,0 +1,104 @@
+import ManagedObjected from "../base/ManagedObject.js";
+
+export default class View extends ManagedObjected
+{
+    init()
+    {        
+        super.init();
+        this._subviews = [];
+        this.$element = $(`<${this.getElementTag()} />`);
+        if (this.id !== null)
+        {
+            this.$element.attr("id", this.id);        
+        }
+        this.$container = this.$element;
+    }
+
+    getElementTag()
+    {
+        return "div";
+    }
+
+    addSubview(view)
+    {
+        if (view instanceof View)
+        {
+            if (view.parent)
+            {
+                view.removeFromParent();
+            }
+            view._parent = this;
+            this._subviews.push(view);
+            this.$container.append(view.$element);
+        }
+    }
+
+    removeSubview(view, neverUseAgain = false)
+    {
+        const index = this.subviews.indexOf(view);
+        if (index > -1)
+        {
+            view._parent = null;
+            this.subviews.splice(index, 1);
+            if (neverUseAgain)
+            {
+                view.$element.remove();
+            }
+            else
+            {
+                view.$element.detach();
+            }
+        }
+    }
+
+    addSubviews(views)
+    {
+        if (Array.isArray(views))
+        {
+            views.forEach(view => {
+                this.addSubview(view);
+            });
+        }
+    }
+
+    removeAllSubviews(neverUseAgain = false)
+    {
+        while (this.subviews.length > 0)
+        {
+            this.removeSubview(this.subviews[0], neverUseAgain);
+        }
+    }
+
+    removeFromParent()
+    {
+        if (this.parent)
+        {
+            this.parent.removeSubview(this);
+        }
+    }
+
+    addStyleClass(...args)
+    {
+        this.$element.addClass(...args);
+    }
+
+    removeStyleClass(...args)
+    {
+        this.$element.removeClass(...args);
+    }
+
+    toggleStyleClass(...args)
+    {
+        this.$element.toggleClass(...args);
+    }
+
+    get subviews()
+    {
+        return this._subviews;
+    }
+
+    $(...args)
+    {
+        return this.$element.find(...args);
+    }
+}

@@ -6,6 +6,7 @@ module.exports = {
     context: path.resolve(__dirname, "src"),
     entry: {
         vendor: [ "jquery" ],
+        nju: [ "./nju/resource/index.less" ],
         nm: [ "./nm/index.js", "./nm/resource/index.less" ],
     },
     output: {
@@ -32,7 +33,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             "$": "jquery",
             "jQuery": "jquery",
-            "window.$": "jqeury",
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
