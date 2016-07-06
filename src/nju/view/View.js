@@ -29,7 +29,7 @@ export default class View extends ManagedObjected
             }
             view._parent = this;
             this._subviews.push(view);
-            this.$container.append(view.$element);
+            view.placeAt(this.$container);
         }
     }
 
@@ -75,6 +75,12 @@ export default class View extends ManagedObjected
         {
             this.parent.removeSubview(this);
         }
+    }
+
+    placeAt(target)
+    {
+        const $target = target instanceof jQuery ? target : $(target);
+        $target.append(this.$element);
     }
 
     addStyleClass(...args)

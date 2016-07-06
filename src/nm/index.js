@@ -1,25 +1,30 @@
-import config from "../../config";
-import PlayListView from "./view/PlayListView";
-import TrackListView from "./view/TrackListView";
-import Panel from "./panel/Panel";
+// import config from "../../config";
+// import PlayListView from "./view/PlayListView";
+// import TrackListView from "./view/TrackListView";
+// import Panel from "./panel/Panel";
+import Application from "./app/Application";
 
 $(main);
 
 function main()
 {
+    const app = new Application();
+    console.log(app)
+    app.placeAt(document.body);
+    app.run();
 
-    const panel = new Panel("panel");
-    panel.title = "Panel Title";
+    // const panel = new Panel("panel");
+    // panel.title = "Panel Title";
 
-    const playListView = new PlayListView("play-list");
+    // const playListView = new PlayListView("play-list");
 
-    panel.addSubview(playListView)
+    // panel.addSubview(playListView)
 
-    $(document.body).append(panel.$element);
+    // $(document.body).append(panel.$element);
 
 
-    console.log(panel.parent, playListView.parent);
-    
+    // console.log(panel.parent, playListView.parent);
+
     // playListView.parent.removeSubview();
 
     // const trackListView = new TrackListView();
