@@ -1,14 +1,12 @@
 import config from "../../../config";
 
-const NM_API_URL = "http://music.163.com/api/";
-
 export default class ServiceClient
 {
     getUserPlayLists(uid = config.user_id)
     {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${NM_API_URL}/user/playlist/`,
+                url: `/api/user/playlist/`,
                 data: {
                     uid,
                     limit: 1000,
@@ -31,7 +29,7 @@ export default class ServiceClient
     {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${NM_API_URL}/playlist/detail`,
+                url: `/api/playlist/detail`,
                 data: {
                     id,
                 },

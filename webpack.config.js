@@ -6,12 +6,11 @@ module.exports = {
     context: path.resolve(__dirname, "src"),
     entry: {
         vendor: [ "jquery" ],
-        // nju: [ "./nju/resource/index.less" ],
         nm: [ "./nm/index.js", "./nm/resource/index.less" ],
     },
     output: {
         path: path.resolve(__dirname, "assets"),
-        publicPath: "assets",
+        publicPath: "/assets",
         filename: "[name]/bundle.js",
     },
     module: {
@@ -19,13 +18,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: [
-                    "babel-loader?sourceRoot=./src",
-                ],
+                loader: "babel",
             },
             {
                 test: /\.less$/,
-                loader:  ExtractTextPlugin.extract("style", "css!less"), 
+                loader:  ExtractTextPlugin.extract("style", "css!less"),
             },
         ],
     },
@@ -40,4 +37,13 @@ module.exports = {
         }),
         new ExtractTextPlugin("./[name]/resource/bundle.css"),
     ],
+    devServer: {
+        proxy: {
+            "/api/*": {
+                target: "http://music.163.com/",
+                host: "music.163.com",
+                secure: false,
+            }
+        }
+    }
 };
