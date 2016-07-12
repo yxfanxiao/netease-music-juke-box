@@ -1,6 +1,9 @@
 import NJUApplication from "../../nju/app/Application";
 
+import PlayerView from "../view/PlayerView";
 import PlayListView from "../view/PlayListView";
+import TrackTableView from "../view/TrackTableView";
+import ServiceClient from "../service/ServiceClient";
 
 export default class Application extends NJUApplication
 {
@@ -11,6 +14,7 @@ export default class Application extends NJUApplication
 
         this._initLayout();
         this._initPlayListView();
+        this._initTrackTableView();
     }
 
     _initLayout()
@@ -18,7 +22,7 @@ export default class Application extends NJUApplication
         this.$element.append(`
             <header><h1>网易云音乐</h1></header>
             <main>
-                <aside></aside>
+                <aside class="sidebar"></aside>
                 <section class="content"></section>
             </main>
             <footer></footer>
@@ -31,8 +35,31 @@ export default class Application extends NJUApplication
         this.addSubview(this.playListView, this.$("> main > aside"));
     }
 
-    run()
+    _initTrackTableView()
+    {
+        this.trackTableView = new TrackTableView("track-table-view");
+        this.addSubview(this.trackTableView, this.$("> main > aside"));
+    }
+
+
+    async run()
     {
         console.log("The app is running.");
+
+        try
+        {
+            await ServiceClient.getInstance().login();
+            this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
+            console.log(this.playListView.items);
+        }
+        catch (e)
+        {
+            throw e;
+        }
+        // ServiceClient.getInstance().login().then(() => {
+        //     ServiceClient.getInstance().getUserPlayLists().then(res => {
+        //         this.playListView.items = res;
+        //     });
+        // });
     }
 }

@@ -1,49 +1,82 @@
 import config from "../../../config";
 
+const NM_API_URI = "/api";
+
 export default class ServiceClient
 {
-    getUserPlayLists(uid = config.user_id)
+    constructor()
     {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `/api/user/playlist/`,
+        this._userId = null;
+    }
+
+    get userId()
+    {
+        return this._userId;
+    }
+
+    async login()
+    {
+        await this.__pseudoLogin();
+    }
+
+    async __pseudoLogin()
+    {
+        this._userId = config.user_id;
+    }
+
+    async getUserPlayLists(uid = config.user_id)
+    {
+        let res = null;
+        try {
+            res = await $.ajax({
+                url: `${NM_API_URI}/user/playlist/`,
                 data: {
                     uid,
                     limit: 1000,
                     offset: 0,
                 },
-            }).then(res => {
-                if (res.code === 200)
-                {
-                    resolve(res.playlist);
-                }
-                else
-                {
-                    reject(`Response with error code: ${res.code}`);
-                }
-            }, reject);
-        });
+            });
+        }
+        catch (e)
+        {
+            throw e;
+        }
+
+        if (res.code === 200)
+        {
+            return res.playlist;
+        }
+        else
+        {
+            throw new Error(`Response with error code: ${res.code}`);
+        }
     }
 
-    getPlayListDetail(id = config.playlist_id)
+    async getPlayListDetail(id = config.playlist_id)
     {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `/api/playlist/detail`,
+        let res = null;
+        try
+        {
+            res = await $.ajax({
+                url: `${NM_API_URI}/playlist/detail`,
                 data: {
                     id,
                 },
-            }).then(res => {
-                if (res.code === 200)
-                {
-                    resolve(res.result);
-                }
-                else
-                {
-                    reject(`Response with error code: ${res.code}`);
-                }
-            }, reject);
-        });
+            });
+        }
+        catch (e)
+        {
+            throw e;
+        }
+
+        if (res.code === 200)
+        {
+            return res.result;
+        }
+        else
+        {
+            throw new Error(`Response with error code: ${res.code}`);
+        }
     }
 }
 

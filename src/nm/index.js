@@ -6,13 +6,13 @@ $(main);
 
 function main()
 {
-    ServiceClient.getInstance().getUserPlayLists().then(res => {
-        console.log(res);
-    });
-    ServiceClient.getInstance().getPlayListDetail().then(res => {
-        console.log(res);
-    });
-    
+    // ServiceClient.getInstance().getUserPlayLists().then(res => {
+    //     console.log(res);
+    // });
+    // ServiceClient.getInstance().getPlayListDetail().then(res => {
+    //     console.log(res);
+    // });
+
 
 
     const app = new Application();

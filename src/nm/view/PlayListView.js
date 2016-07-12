@@ -1,20 +1,27 @@
-import View from "../../nju/view/View.js";
+import ListView from "../../nju/view/ListView.js";
 
-export default class PlayListView extends View
+export default class PlayListView extends ListView
 {
-    constructor(...args)
-    {
-        super(...args);
-    }
-
     init()
     {
         super.init();
+
         this.addStyleClass("nm-play-list-view");
     }
 
-    getElementTag()
+    $createNewItem()
     {
-        return "ul";
+        const $li = super.$createNewItem();
+        $li.append(`
+            <span class="icon"></span>
+            <span class="text"></span>
+        `);
+        return $li;
+    }
+
+    renderItem(item, $li)
+    {
+        super.renderItem(item, $li);
+        $li.children(".text").text(item.name);
     }
 }
