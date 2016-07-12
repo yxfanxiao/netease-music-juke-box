@@ -38,7 +38,7 @@ export default class Application extends NJUApplication
     _initTrackTableView()
     {
         this.trackTableView = new TrackTableView("track-table-view");
-        this.addSubview(this.trackTableView, this.$("> main > aside"));
+        this.addSubview(this.trackTableView, this.$("> main > .content"));
     }
 
 
@@ -50,16 +50,14 @@ export default class Application extends NJUApplication
         {
             await ServiceClient.getInstance().login();
             this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
-            console.log(this.playListView.items);
+
+            const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[0].id);
+            this.trackTableView.items = playList.tracks;
+            console.log(playList.tracks);
         }
         catch (e)
         {
             throw e;
         }
-        // ServiceClient.getInstance().login().then(() => {
-        //     ServiceClient.getInstance().getUserPlayLists().then(res => {
-        //         this.playListView.items = res;
-        //     });
-        // });
     }
 }
