@@ -29,7 +29,7 @@ export default class ListView extends View
             if (this._items.length > 0)
             {
                 this._items.splice(0, this._items.length);
-                this.$container.children().remove();
+                this.$container.children(this.getItemElementTag()).remove();
             }
         }
         else
@@ -84,5 +84,10 @@ export default class ListView extends View
     getElementTag()
     {
         return "ul";
+    }
+
+    getItemElementTag()
+    {
+        return "li";
     }
 }
