@@ -2,6 +2,17 @@
 {
     table-layout: fixed;
     border-collapse: collapse;
+
+    tr
+    {
+        cursor: default;
+        &.selected
+        {
+            color: @nju-selection-color;
+            background: @nju-selection-bg;
+            cursor: pointer;
+        }
+    }
 }
 
 .nju-table-view.striped

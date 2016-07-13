@@ -1,11 +1,19 @@
 .play-list-view
 {
     background: green;
-    padding-left: 10px;
-    padding-right: 16px;
 
     li
     {
-        text-overflow: ellipsis;
+        padding-left: 10px;
+        padding-right: 16px;
+
+        width: 100%;
+        > span
+        {
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+
+        }
     }
 }

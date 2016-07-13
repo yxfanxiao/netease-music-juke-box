@@ -11,6 +11,7 @@ export default class ServiceClient
     {
         this._userId = null;
     }
+    
     static getInstance = function()
     {
         return  ServiceClient._instance || new ServiceClient();
