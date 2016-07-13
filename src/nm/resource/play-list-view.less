@@ -1,19 +1,17 @@
-.play-list-view
+.nm-play-list-view
 {
-    background: green;
-
     li
     {
-        padding-left: 10px;
-        padding-right: 16px;
+        height: @nm-list-item-height;
+        line-height: @nm-list-item-height;
+        padding: 4px 12px;
 
-        width: 100%;
-        > span
+        .text
         {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;;
             white-space: nowrap;
-            overflow-x: hidden;
-            text-overflow: ellipsis;
-
         }
     }
 }

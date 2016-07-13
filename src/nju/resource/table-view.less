@@ -3,7 +3,7 @@
     table-layout: fixed;
     border-collapse: collapse;
 
-    tr
+    tbody tr
     {
         cursor: default;
         &.selected
@@ -17,7 +17,7 @@
 
 .nju-table-view.striped
 {
-    tr:nth-child(2n)
+    tr:nth-child(2n):not(.selected)
     {
         background: @nju-striped-color;
     }
