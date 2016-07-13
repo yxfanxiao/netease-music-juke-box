@@ -78,7 +78,7 @@ export default class ListView extends View
 
     $createNewItem()
     {
-        return $("<li />");
+        return $(`<${this.getItemElementTag()} />`);
     }
 
     getElementTag()

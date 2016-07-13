@@ -1,40 +1,31 @@
-import TableView from "../../nju/view/TableView.js";
+import TableView from "../../nju/view/TableView";
+import TimeUtil from "../../nju/util/TimeUtil";
 
 export default class TrackTableView extends TableView
 {
     init()
     {
         super.init();
-        this.addStyleClass("track-table-view");
+        this.addStyleClass("track-table-view striped");
     }
-
-    // $createHeadItem()
-    // {
-    //     const $tr = super.$createHeadItem();
-    //     // $tr.append(`
-    //     //     <td class="name">歌名</td>
-    //     //     <td class="artist">歌手</td>
-    //     //     <td class="album">专辑</td>
-    //     // `);
-    //
-    //
-    //
-    //     // const $tr = this.$createNewItem();
-    //     // $tr.children(".name").text("歌名");
-    //     // $tr.children(".artist").text("歌手");
-    //     // $tr.children(".album").text("专辑");
-    //     return $tr;
-    // }
 
     renderHeadItem($tr)
     {
-        this.renderItem({
-            name: "歌名",
-            artists: [{ name: "歌手" }],
-            album: {
-                name: "专辑",
-            },
-        }, $tr);
+        super.renderHeadItem($tr);
+        $tr.children(".name").text("歌名");
+        $tr.children(".artist").text("歌手");
+        $tr.children(".album").text("专辑");
+        $tr.children(".duration").text("时长");
+        // this.renderItem({
+        //     name: "歌名",
+        //     artists: [{ name: "歌手" }],
+        //     album: {
+        //         name: "专辑",
+        //     },
+        //     lMusic: {
+        //
+        //     }
+        // }, $tr);
     }
 
     $createNewItem()
@@ -44,6 +35,7 @@ export default class TrackTableView extends TableView
             <td class="name"></td>
             <td class="artist"></td>
             <td class="album"></td>
+            <td class="duration"></td>
         `);
         return $tr;
     }
@@ -54,6 +46,6 @@ export default class TrackTableView extends TableView
         $li.children(".name").text(item.name);
         $li.children(".artist").text(item.artists.map(artist => artist.name).join(", "));
         $li.children(".album").text(item.album.name);
-
+        $li.children(".duration").text(TimeUtil.format(item.lMusic.playTime));
     }
 }
