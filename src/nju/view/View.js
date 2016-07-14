@@ -2,6 +2,12 @@ import ManagedObjected from "../base/ManagedObject.js";
 
 export default class View extends ManagedObjected
 {
+    constructor(id, controller = null)
+    {
+        super(id);
+        this._controller = controller;
+    }
+
     init()
     {
         super.init();
@@ -13,6 +19,11 @@ export default class View extends ManagedObjected
             this.$element.attr("id", this.id);
         }
         this.$container = this.$element;
+    }
+
+    get controller()
+    {
+        return this._controller;
     }
 
     getElementTag()

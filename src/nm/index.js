@@ -1,6 +1,6 @@
-import Application from "./app/Application";
+import ApplicationController from "./app/ApplicationController";
 
-import ServiceClient from "./service/ServiceClient";
+// import ServiceClient from "./service/ServiceClient";
 
 $(main);
 
@@ -15,8 +15,8 @@ function main()
 
 
 
-    const app = new Application();
+    const applicationController = new ApplicationController();
 
-    app.placeAt(document.body);
-    app.run();
+    applicationController.view.placeAt(document.body);
+    applicationController.run();
 }

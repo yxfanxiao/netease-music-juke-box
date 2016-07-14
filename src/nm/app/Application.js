@@ -3,7 +3,6 @@ import NJUApplication from "../../nju/app/Application";
 import PlayerView from "../view/PlayerView";
 import PlayListView from "../view/PlayListView";
 import TrackTableView from "../view/TrackTableView";
-import ServiceClient from "../service/ServiceClient";
 
 export default class Application extends NJUApplication
 {
@@ -39,26 +38,5 @@ export default class Application extends NJUApplication
     {
         this.trackTableView = new TrackTableView("track-table-view");
         this.addSubview(this.trackTableView, this.$("> main > .content"));
-    }
-
-
-    async run()
-    {
-        console.log("The app is running.");
-
-        try
-        {
-            await ServiceClient.getInstance().login();
-            this.playListView.items = await ServiceClient.getInstance().getUserPlayLists();
-            this.playListView.selection = this.playListView.items[0];
-
-            const playList = await ServiceClient.getInstance().getPlayListDetail(this.playListView.items[10].id);
-            this.trackTableView.items = playList.tracks;
-            // console.log(playList.tracks);
-        }
-        catch (e)
-        {
-            throw e;
-        }
     }
 }
