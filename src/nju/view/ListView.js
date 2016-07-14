@@ -34,6 +34,11 @@ export default class ListView extends View
         this.selectItem(value);
     }
 
+    get selectedId()
+    {
+        return this.getIdOfItem(this.selection);
+    }
+
     _initLayout()
     {
 

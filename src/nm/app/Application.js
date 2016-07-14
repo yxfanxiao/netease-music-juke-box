@@ -14,6 +14,7 @@ export default class Application extends NJUApplication
         this._initLayout();
         this._initPlayListView();
         this._initTrackTableView();
+        this._initPlayerView();
     }
 
     _initLayout()
@@ -38,5 +39,11 @@ export default class Application extends NJUApplication
     {
         this.trackTableView = new TrackTableView("track-table-view");
         this.addSubview(this.trackTableView, this.$("> main > .content"));
+    }
+
+    _initPlayerView()
+    {
+        this.playerView = new PlayerView("player-view");
+        this.addSubview(this.playerView, this.$("> footer"));
     }
 }

@@ -8,6 +8,8 @@ export default class TableView extends ListView
 
         this.removeStyleClass("nju-list-view");
         this.addStyleClass("nju-table-view");
+
+        this.$container.on("dblclick", this.getItemElementTag(), this._ondblclick.bind(this));
     }
 
     _initLayout()
@@ -41,5 +43,10 @@ export default class TableView extends ListView
     getItemElementTag()
     {
         return "tr";
+    }
+
+    _ondblclick(e)
+    {
+        this.trigger("itemdblclick");
     }
 }
