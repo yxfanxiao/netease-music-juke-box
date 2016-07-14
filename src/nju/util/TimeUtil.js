@@ -12,5 +12,6 @@ export default class TimeUtil
 
 function _digt2(num)
 {
-    return num < 10 ? "0" + num : num;
+    return `0${num}`.substr(-2);
+    // return num < 10 ? "0" + num : num;
 }

@@ -90,11 +90,7 @@ export default class ListView extends View
         if (item)
         {
             const $item = this.$getItem(item);
-            console.log($item);
             $item.addClass("selected");
-
-            console.log(item)
-
         }
     }
 

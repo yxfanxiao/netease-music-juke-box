@@ -3,14 +3,14 @@ import ManagedObjected from "../base/ManagedObject.js";
 export default class View extends ManagedObjected
 {
     init()
-    {        
+    {
         super.init();
-        
+
         this._subviews = [];
         this.$element = $(`<${this.getElementTag()} />`);
         if (this.id !== null)
         {
-            this.$element.attr("id", this.id);        
+            this.$element.attr("id", this.id);
         }
         this.$container = this.$element;
     }
