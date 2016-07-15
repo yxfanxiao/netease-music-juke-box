@@ -1,5 +1,9 @@
 import View from "../../nju/view/View";
 
+import SuggestView from "./SuggestView";
+
+import SearchViewController from "./SearchViewController";
+
 export default class SearchView extends View
 {
     init()
@@ -13,6 +17,9 @@ export default class SearchView extends View
         this.$input = $(`<input type="search" placeholder="搜索音乐" />`);
         this.$element.append(this.$input);
 
+        this._initSuggestView();
+
+        this.$element.on("input", this._input.bind(this));
         this.$element.on("keydown", this._keydown.bind(this));
         this.$element.on("click", ".icon", this._item_onclick.bind(this));
     }
@@ -26,6 +33,12 @@ export default class SearchView extends View
         this.$input.val(typeof(value) === "string" ? value.trim() : "");
     }
 
+    _initSuggestView()
+    {
+        this.suggestView = new SuggestView("nm-suggest");
+        this.addSubview(this.suggestView);
+    }
+
     search(text = this.text)
     {
         this.text = text;
@@ -33,6 +46,11 @@ export default class SearchView extends View
         {
             this.trigger("search");
         }
+    }
+
+    _input(e)
+    {
+        this.trigger("input");
     }
 
     _item_onclick(e)
