@@ -11,7 +11,7 @@ export default class ServiceClient
     {
         this._userId = null;
     }
-    
+
     static getInstance = function()
     {
         return  ServiceClient._instance || new ServiceClient();
@@ -86,8 +86,41 @@ export default class ServiceClient
             throw new Error(`Response with error code: ${res.code}`);
         }
     }
+
+    async search(keyword, suggest = false)
+    {
+        let res = null;
+        try
+        {
+            res = await $.ajax({
+                url: suggest ? `${NM_API_URI}/search/suggest/web/` : `${NM_API_URI}/search/get/`,
+                method: "post",
+                data: {
+                    s: keyword,
+                    type: 1,
+                    offset: 0,
+                    limit: 100,
+                    sub: false,
+                },
+            });
+        }
+        catch (e)
+        {
+            throw e;
+        }
+
+        if (res)
+        {
+            res = JSON.parse(res);
+        }
+
+        if (res.code === 200)
+        {
+            return res.result.songs;
+        }
+        else
+        {
+            throw new Error(`Response with error code: ${res.code}`);
+        }
+    }
 }
-
-
-// let __instance = null;
-// ServiceClient.getInstance = () => __instance || new ServiceClient();
