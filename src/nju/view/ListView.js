@@ -80,7 +80,6 @@ export default class ListView extends View
                 this.addItem(item);
             });
         }
-
     }
 
     addItem(item)
