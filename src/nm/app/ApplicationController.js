@@ -112,7 +112,6 @@ export default class ApplicationController extends NJUApplicationController
         if (this.activeTrack !== null)
         {
             this.playerView.track = this.activeTrack;
-            console.log(this.palyerView.track);
         }
         else
         {

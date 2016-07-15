@@ -43,6 +43,9 @@ module.exports = {
                 target: "http://music.163.com/",
                 host: "music.163.com",
                 secure: false,
+                headers: {
+                    "Referer": "http://music.163.com",
+                },
             }
         }
     }
