@@ -9,8 +9,8 @@ export default class SearchView extends View
         this._text = null;
         this.addStyleClass("nm-search-view");
 
-        this.$element.append(`<span class="icon"></span>`);
-        this.$input = $(`<input type="search" />`);
+        this.$element.append(`<span class="icon iconfont icon-search"></span>`);
+        this.$input = $(`<input type="search" placeholder="搜索音乐" />`);
         this.$element.append(this.$input);
 
         this.$element.on("keydown", this._keydown.bind(this));

@@ -38,6 +38,18 @@ export default class ListView extends View
     {
         return this.getIdOfItem(this.selection);
     }
+    set selectedId(value)
+    {
+        const $item = this.$getItem(value);
+        if ($item.lenngth > 0)
+        {
+            const item = $item.data("item");
+            if (item)
+            {
+                this.selection = item;
+            }
+        }
+    }
 
     _initLayout()
     {
@@ -103,19 +115,16 @@ export default class ListView extends View
 
     getIdOfItem(item)
     {
-        return item.id;
+        if (item && item.id !== null)
+        {
+            return item.id;
+        }
+        else
+        {
+            return null;
+        }
         // throw new Error("Must implement getIdOfItem(itme) in derived class");
     }
-
-
-
-
-
-
-
-
-
-
 
     getTypeOfItem(item)
     {
