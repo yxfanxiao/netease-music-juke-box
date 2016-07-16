@@ -22,6 +22,7 @@ export default class SearchView extends View
         this.$element.on("input", this._input.bind(this));
         this.$element.on("keydown", this._keydown.bind(this));
         this.$element.on("click", ".icon", this._item_onclick.bind(this));
+
     }
 
     get text()
@@ -35,7 +36,7 @@ export default class SearchView extends View
 
     _initSuggestView()
     {
-        this.suggestView = new SuggestView("nm-suggest");
+        this.suggestView = new SuggestView("suggest-view");
         this.addSubview(this.suggestView);
     }
 
@@ -50,7 +51,10 @@ export default class SearchView extends View
 
     _input(e)
     {
-        this.trigger("input");
+        this.trigger("input", {
+            text: this.text,
+            ssuggest: true,
+        });
     }
 
     _item_onclick(e)

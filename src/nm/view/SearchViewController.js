@@ -1,49 +1,32 @@
-import ViewController from "../view/ViewController";
+import ViewController from "../../nju/view/ViewController";
+
+import SearchView from "./SearchView";
+import ServiceClient from "../service/ServiceClient";
+
 
 export default class SearchViewController extends ViewController
 {
-    static _instance = null;
 
-
-    constructor(...args)
+    createView({ viewId = null } = options)
     {
-        super(...args);
-        if (!ApplicationController._instance)
-        {
-            ApplicationController._instance = this;
-        }
-        else
-        {
-            throw new Error("ApplicationController is a singleton object. It can only be constructed once.");
-        }
+        this.searchView =  new SearchView(viewId);
+        this.suggestView = this.searchView.suggestView;
+
+        this.searchView.on("input", this._searchView_onInput.bind(this));
+        this.suggestView.on("itemclick", this._suggestView_onitemclick.bind(this));
+        return this.searchView;
     }
 
-    static getInstance()
+    async _searchView_onInput(e)
     {
-        if (!ApplicationController._instance)
-        {
-            throw new Error("ApplicationController has not been instantiated yet.");
-        }
-        return ApplicationController._instance;
+        const { text, suggest } = e.parameters;
+        const songs = await ServiceClient.getInstance().search(text, true);
+        this.suggestView.items = songs;
     }
 
-    get application()
+    async _suggestView_onitemclick(e)
     {
-        return this.view;
-    }
-
-    createView(options = {})
-    {
-        return this.createApplication(options);
-    }
-
-    createApplication(options = {})
-    {
-        return new Application();
-    }
-
-    run()
-    {
-
+        const keyword = e.parameters.item.name;
+        this.view.search(keyword);
     }
 }
