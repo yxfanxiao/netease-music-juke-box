@@ -19,10 +19,12 @@ export default class SearchView extends View
 
         this._initSuggestView();
 
-        this.$element.on("input", this._input.bind(this));
+        this.$input.on("input", this._input.bind(this));
+        this.$input.on("focus", this._focus.bind(this));
+        this.$input.on("blur", this._blur.bind(this));
+
         this.$element.on("keydown", this._keydown.bind(this));
         this.$element.on("click", ".icon", this._item_onclick.bind(this));
-
     }
 
     get text()
@@ -38,6 +40,7 @@ export default class SearchView extends View
     {
         this.suggestView = new SuggestView("suggest-view");
         this.addSubview(this.suggestView);
+        this.suggestView.hide();
     }
 
     search(text = this.text)
@@ -51,10 +54,13 @@ export default class SearchView extends View
 
     _input(e)
     {
-        this.trigger("input", {
-            text: this.text,
-            ssuggest: true,
-        });
+        if (this.text)
+        {
+            this.trigger("input", {
+                text: this.text,
+                ssuggest: true,
+            });
+        }
     }
 
     _item_onclick(e)
@@ -68,5 +74,15 @@ export default class SearchView extends View
         {
             this.search();
         }
+    }
+
+    _focus()
+    {
+        this.trigger("focus");
+    }
+
+    _blur()
+    {
+        this.trigger("blur");
     }
 }

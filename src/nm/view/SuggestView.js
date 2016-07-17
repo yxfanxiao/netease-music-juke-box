@@ -24,4 +24,26 @@ export default class SuggestView extends ListView
         super.renderItem(item, $li);
         $li.children(".music").text(item.name);
     }
+
+    show()
+    {
+        this.$element.show();
+    }
+
+    hide()
+    {
+        this.$element.hide();
+    }
+
+    toggle(shown)
+    {
+        if (shown)
+        {
+            this.show();
+        }
+        else
+        {
+            this.hide();
+        }
+    }
 }

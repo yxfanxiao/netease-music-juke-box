@@ -12,7 +12,7 @@ export default class ListView extends View
         this.addStyleClass("nju-list-view");
 
         this._initLayout();
-        this.$container.on("click", this.getItemElementTag(), this._onclick.bind(this));
+        this.$container.on("mousedown", this.getItemElementTag(), this._onclick.bind(this));
     }
 
     get items()

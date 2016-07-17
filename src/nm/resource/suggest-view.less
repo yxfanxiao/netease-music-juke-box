@@ -11,10 +11,16 @@
         line-height: @nm-list-item-height;
         padding: 0 39px;
 
-
         &:hover
         {
             background: @nm-selected-color;
+        }
+
+        > .music
+        {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
 }
