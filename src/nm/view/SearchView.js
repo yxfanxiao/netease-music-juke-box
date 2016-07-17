@@ -54,12 +54,23 @@ export default class SearchView extends View
 
     _input(e)
     {
-        if (this.text)
+        let inputTimer = null;
+        if (inputTimer)
         {
-            this.trigger("input", {
-                text: this.text,
-                ssuggest: true,
-            });
+            window.clearTimeout(inputTimer);
+            inputTimer = null;
+        }
+        else
+        {
+            inputTimer = window.setTimeout(() => {
+                if (this.text)
+                {
+                    this.trigger("input", {
+                        text: this.text,
+                        ssuggest: true,
+                    });
+                }
+            }, 200);
         }
     }
 
